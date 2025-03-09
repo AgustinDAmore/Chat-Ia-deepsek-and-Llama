@@ -39,7 +39,7 @@ Antes de comenzar, asegúrate de tener lo siguiente:
         
 ### 3. **Instalamos los paquetes necesarios**
         pip install openai
-        
+
 ### 4. **Para desactivar el entorno virtual escribimos en ambos SO**
         deactivate
 
@@ -99,18 +99,15 @@ Antes de comenzar, asegúrate de tener lo siguiente:
 ### **1. def cambiar_rol(rol):**
 
 ### **1.a. Crear nuevos Roles**
-    ```python
     roles = {
         "Asistente": "You are a helpful assistant",
         "Filósofo": "Eres un filósofo experto en ética y filosofía moderna.",
         "Programador": "Eres un programador experto en Python y desarrollo de software.",
         "Historiador": "Eres un historiador especializado en la historia del siglo XX.",
     }
-    ```
 >Vemos que la variable roles es un diccionario donde la calve es el nombre del rol
 >y el valor es como se debe comportar. siguiendo dicho formato podemos crear todos los roles que quisieramos
 
-    ```python
     roles = {
         "Asistente": "You are a helpful assistant",
         "Filósofo": "Eres un filósofo experto en ética y filosofía moderna.",
@@ -118,6 +115,5 @@ Antes de comenzar, asegúrate de tener lo siguiente:
         "Historiador": "Eres un historiador especializado en la historia del siglo XX.",
         "Nuevo rol": "Aqui agregamos el tema del cual es 'especialista'",
     }
-    ```
 > ⚠️ **¡Atención!** 
 > Es necesario agregarlo tambien en menu_rol para que asi aparezca el nuevo rol en el menu desplegable
