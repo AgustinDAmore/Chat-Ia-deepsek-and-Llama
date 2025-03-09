@@ -51,6 +51,7 @@ Antes de comenzar, asegúrate de tener lo siguiente:
 ##  🧑‍💻 Interfaz de usuario
 
 ![alt text](image.png)
+
 La interfaz es responsive y simple de usar
 ### **Menu superior**
 Contiene 4 opciones
@@ -88,7 +89,7 @@ Contiene 4 opciones
 - **Boton Enviar**
     Una vez redactado el mensaje de debe precionar
     este boton para enviar el mensaje
-    
+
 >Debajo de la Entrda de texto
 >Se muestra el estado actual del chat
 >Rol actual: **muestra el nombre del rol activo**
