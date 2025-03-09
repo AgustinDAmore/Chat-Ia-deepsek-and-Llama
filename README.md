@@ -51,13 +51,20 @@ Antes de comenzar, asegúrate de tener lo siguiente:
 ##  🔧 Perzonalizar el codigo
 
 ### **1. def cambiar_rol(rol):**
-    En dicha funcion nosotros podemos usar roles pre cargados. estos roles permiten brindar contexto a la pregunta
-    para que esta sea lo mas precisa posible Por defecto esta programado con 4 Roles
-    °Asistente *Este es el rol por defecto de todos los asistentes*
-    Los siguientes 3 son de muestra.
-    °Filosofo 
-    °Programador
-    °Historiador
+En dicha función, podemos usar roles pre-cargados. Estos roles permiten brindar contexto a la pregunta para que esta sea lo más precisa posible. Por defecto, está programado con 4 roles:
+
+- **Asistente**:  
+  Este es el rol por defecto de todos los asistentes.
+
+- **Filósofo**:  
+  Rol de muestra para preguntas relacionadas con filosofía.
+
+- **Programador**:  
+  Rol de muestra para preguntas relacionadas con programación y tecnología.
+
+- **Historiador**:  
+  Rol de muestra para preguntas relacionadas con historia y eventos pasados.
+  
 ### **1.a. Crear nuevos Roles**
     ```python
     roles = {
