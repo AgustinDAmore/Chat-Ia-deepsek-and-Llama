@@ -121,7 +121,7 @@ def aplicar_formato_negritas():
     for match in coincidencias:
         inicio = f"1.0 + {match.start()} chars"
         fin = f"1.0 + {match.end()} chars"
-        salida.tag_add("negrita", inicio, fin)
+        salida.tag_add("negrita", inicio, fin) 
 
 # Función para exportar el chat a un archivo .txt
 def exportar_txt():
