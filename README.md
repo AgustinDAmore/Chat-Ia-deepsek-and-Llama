@@ -35,6 +35,7 @@ Antes de comenzar, asegúrate de tener lo siguiente:
 
 ### 2. **Para activarel entorno**
         ```bash
+        
         En linux: source nombre_del_entorno/bin/activate
         En Windows: nombre_del_entorno\Scripts\activate
         ```
