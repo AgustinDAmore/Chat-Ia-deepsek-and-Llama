@@ -113,15 +113,19 @@ def actualizar_interfaz(respuesta):
 
 # Función para aplicar negritas al texto entre **
 def aplicar_formato_negritas():
-    # Buscar todas las coincidencias de texto entre **
+    # Obtener todo el texto del widget Text
     texto = salida.get("1.0", tk.END)
+
+    # Buscar todas las coincidencias de texto entre **
     coincidencias = list(re.finditer(r"\*\*(.*?)\*\*", texto))
 
-    # Aplicar formato a cada coincidencia
-    for match in coincidencias:
+    for match in reversed(coincidencias):  
         inicio = f"1.0 + {match.start()} chars"
         fin = f"1.0 + {match.end()} chars"
-        salida.tag_add("negrita", inicio, fin) 
+        salida.delete(inicio, f"1.0 + {match.start() + 2} chars")  
+        salida.delete(f"1.0 + {match.end() - 4} chars", fin) 
+        salida.tag_add("negrita", f"1.0 + {match.start()} chars", f"1.0 + {match.end() - 4} chars")
+        salida.insert(f"1.0 + {match.end() - 4} chars", " ")
 
 # Función para exportar el chat a un archivo .txt
 def exportar_txt():
