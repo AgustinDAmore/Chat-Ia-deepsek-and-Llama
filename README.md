@@ -27,21 +27,23 @@ Antes de comenzar, asegúrate de tener lo siguiente:
    api_key_deepseek = "Tu_key_API_DeepSeek"
    api_key_llama = "Tu_key_API_Llama"
 
-Se recomienda usar un .env para nstalar las librerias
-En caso de no querer hacerlo pasar directamente a la linea 22
+---
 
-Creamos el entorno virtual:
-En linux: python3 -m venv nombre_del_entorno
-En Windows: python -m venv nombre_del_entorno
+## 🖥️ Se recomienda usar un .env para instalar las librerias
 
-Para activarlo
-En linux: source nombre_del_entorno/bin/activate
-En Windows: nombre_del_entorno\Scripts\activate
+###    Creamos el entorno virtual:
+        En linux: python3 -m venv nombre_del_entorno
+        En Windows: python -m venv nombre_del_entorno
 
-Instalamos los paquetes necesarios
-pip install openai
+###     Para activarlo
+        En linux: source nombre_del_entorno/bin/activate
+        En Windows: nombre_del_entorno\Scripts\activate
 
-Para desactivar el entorno virtual escribimos en ambos SO
-deactivate
+###     Instalamos los paquetes necesarios
+        pip install openai
 
-Explicacion del codigo fuente
+### Para desactivar el entorno virtual escribimos en ambos SO
+    deactivate
+
+---
+
