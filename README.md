@@ -94,6 +94,7 @@ Antes de comenzar, asegúrate de tener lo siguiente:
 >Se muestra el estado actual del chat
 
 >Rol actual: **muestra el nombre del rol activo**
+
 >Asistente actual: **muestra el nombre de IA activa**
 
 ---
