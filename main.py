@@ -56,6 +56,7 @@ def enviar():
         # Habilitar el área de texto para insertar el mensaje
         salida.config(state=tk.NORMAL)
         salida.insert(tk.END, f"Tú: {texto}\n")
+        salida.insert(tk.END, f"\n")
         salida.insert(tk.END, f"{asistente_actual}: Pensando...\n")  # Mensaje temporal
         salida.yview(tk.END)  # Desplazar al final
         salida.config(state=tk.DISABLED)
