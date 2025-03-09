@@ -16,7 +16,6 @@ Antes de comenzar, asegúrate de tener lo siguiente:
    - Asegúrate de tener Python instalado (versión 3.7 o superior).
 
 ---
-
 ## 🛠️ Configuración del proyecto
 
 ### 1. **Crear el archivo `Api_Keys.py`**
@@ -26,67 +25,57 @@ Antes de comenzar, asegúrate de tener lo siguiente:
    # Api_Keys.py
    api_key_deepseek = "Tu_key_API_DeepSeek"
    api_key_llama = "Tu_key_API_Llama"
+   ```
 
+## 🖥️ Se recomienda usar un .env para instalar las librerias
 
-🖥️ Se recomienda usar un `.env` para instalar las librerías.
+### 1. **Creamos el entorno virtual:**
+        En linux: python3 -m venv nombre_del_entorno
+        En Windows: python -m venv nombre_del_entorno
 
-```markdown
-1.  Crear el entorno virtual
+### 2. **Para activarel entorno**
+        ```bash
+        En linux: source nombre_del_entorno/bin/activate
+        En Windows: nombre_del_entorno\Scripts\activate
+        ```
+        
+### 3. **Instalamos los paquetes necesarios**
+        ```bash
+        pip install openai
+        ```
+### 4. **Para desactivar el entorno virtual escribimos en ambos SO**
+        ```bash
+        deactivate
+        ```
 
-    En Linux:
+##  🔧 Perzonalizar el codigo
 
-    ```bash
-    python3 -m venv nombre_del_entorno
+### **1. def cambiar_rol(rol):**
+    En dicha funcion nosotros podemos usar roles pre cargados. estos roles permiten brindar contexto a la pregunta
+    para que esta sea lo mas precisa posible Por defecto esta programado con 4 Roles
+    °Asistente *Este es el rol por defecto de todos los asistentes*
+    Los siguientes 3 son de muestra.
+    °Filosofo 
+    °Programador
+    °Historiador
+### **1.a. Crear nuevos Roles**
+    ```python
+    roles = {
+        "Asistente": "You are a helpful assistant",
+        "Filósofo": "Eres un filósofo experto en ética y filosofía moderna.",
+        "Programador": "Eres un programador experto en Python y desarrollo de software.",
+        "Historiador": "Eres un historiador especializado en la historia del siglo XX.",
+    }```
+    Vemos que la variable variable es un diccionario donde la calve es el nombre del rol
+    y el valor es como se debe comportar. siguiendo dicho formato podemos crear todos los roles que quisieramos
+    ```python
+    roles = {
+        "Asistente": "You are a helpful assistant",
+        "Filósofo": "Eres un filósofo experto en ética y filosofía moderna.",
+        "Programador": "Eres un programador experto en Python y desarrollo de software.",
+        "Historiador": "Eres un historiador especializado en la historia del siglo XX.",
+        "Nuevo rol": "Aqui agregamos el tema del cual es 'especialista'",
+    }
     ```
-
-    En Windows:
-
-    ```bash
-    python -m venv nombre_del_entorno
-    ```
-
-2.  Activar el entorno virtual
-
-    En Linux:
-
-    ```bash
-    source nombre_del_entorno/bin/activate
-    ```
-
-    En Windows:
-
-    ```bash
-    nombre_del_entorno\Scripts\activate
-    ```
-
-3.  Instalar los paquetes necesarios
-
-    ```bash
-    pip install openai
-    ```
-
-4.  Desactivar el entorno virtual
-
-    ```bash
-    deactivate
-    ```
-
-📝 Explicación del código
-
-El proyecto se centra en la integración de dos APIs de modelos de lenguaje: `DeepSeek` y `Llama`. A continuación, se describe brevemente cómo funciona el código:
-
-* **Configuración de las claves de API**:
-    * Las claves de API se almacenan en un archivo separado (`Api_Keys.py`) para mantener la seguridad y facilitar su gestión.
-* **Uso de un entorno virtual**:
-    * Se recomienda utilizar un entorno virtual para aislar las dependencias del proyecto y evitar conflictos con otros proyectos.
-* **Instalación de dependencias**:
-    * Se utiliza `pip` para instalar las librerías necesarias, como `openai`, que facilita la interacción con las APIs de los modelos de lenguaje.
-* **Interacción con las APIs**:
-    * El código principal del proyecto se encargará de enviar solicitudes a las APIs de DeepSeek y Llama, procesar las respuestas y generar salidas útiles basadas en los modelos de lenguaje.
-
-🚀 Ejecución del proyecto
-
-Una vez configurado el entorno y las claves de API, puedes ejecutar el proyecto para interactuar con las APIs y obtener respuestas generadas por los modelos de lenguaje.
-
-```bash
-python main.py
+    > ⚠️ **¡Atención!** 
+    > Es necesario agregarlo tambien en menu_rol para que asi aparezca el nuevo rol en el menu desplegable
