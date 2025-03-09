@@ -67,8 +67,8 @@ Antes de comenzar, asegúrate de tener lo siguiente:
         "Historiador": "Eres un historiador especializado en la historia del siglo XX.",
     }
     ```
-    Vemos que la variable variable es un diccionario donde la calve es el nombre del rol
-    y el valor es como se debe comportar. siguiendo dicho formato podemos crear todos los roles que quisieramos
+>Vemos que la variable variable es un diccionario donde la calve es el nombre del rol
+>y el valor es como se debe comportar. siguiendo dicho formato podemos crear todos los roles que quisieramos
 
     ```python
     roles = {
