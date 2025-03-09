@@ -52,9 +52,9 @@ Antes de comenzar, asegúrate de tener lo siguiente:
 
 ![alt text](image.png)
 
-La interfaz es responsive y simple de usar
+>La interfaz es responsive y simple de usar
 ### **Menu superior**
-Contiene 4 opciones
+>Contiene 4 opciones
 - **Archivo**
     - **Exportar TXT**
         Al seleccionar estaopcion nos permite exportar toda la conversacion en un txt para su posterior lectura
