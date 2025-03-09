@@ -33,21 +33,16 @@ Antes de comenzar, asegúrate de tener lo siguiente:
         En linux: python3 -m venv nombre_del_entorno
         En Windows: python -m venv nombre_del_entorno
 
-### 2. **Para activarel entorno**
-        ```bash
-        
+### 2. **Para activar el entorno**
         En linux: source nombre_del_entorno/bin/activate
         En Windows: nombre_del_entorno\Scripts\activate
-        ```
         
 ### 3. **Instalamos los paquetes necesarios**
-        ```bash
         pip install openai
-        ```
+        
 ### 4. **Para desactivar el entorno virtual escribimos en ambos SO**
-        ```bash
         deactivate
-        ```
+
 ---
 ##  🧑‍💻 Interfaz de usuario
 
