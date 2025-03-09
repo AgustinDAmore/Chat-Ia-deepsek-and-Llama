@@ -26,7 +26,7 @@ Antes de comenzar, asegúrate de tener lo siguiente:
    api_key_deepseek = "Tu_key_API_DeepSeek"
    api_key_llama = "Tu_key_API_Llama"
    ```
-
+---
 ## 🖥️ Se recomienda usar un .env para instalar las librerias
 
 ### 1. **Creamos el entorno virtual:**
@@ -47,7 +47,7 @@ Antes de comenzar, asegúrate de tener lo siguiente:
         ```bash
         deactivate
         ```
-
+---
 ##  🔧 Perzonalizar el codigo
 
 ### **1. def cambiar_rol(rol):**
@@ -65,9 +65,11 @@ Antes de comenzar, asegúrate de tener lo siguiente:
         "Filósofo": "Eres un filósofo experto en ética y filosofía moderna.",
         "Programador": "Eres un programador experto en Python y desarrollo de software.",
         "Historiador": "Eres un historiador especializado en la historia del siglo XX.",
-    }```
+    }
+    ```
     Vemos que la variable variable es un diccionario donde la calve es el nombre del rol
     y el valor es como se debe comportar. siguiendo dicho formato podemos crear todos los roles que quisieramos
+
     ```python
     roles = {
         "Asistente": "You are a helpful assistant",
@@ -77,5 +79,5 @@ Antes de comenzar, asegúrate de tener lo siguiente:
         "Nuevo rol": "Aqui agregamos el tema del cual es 'especialista'",
     }
     ```
-    > ⚠️ **¡Atención!** 
-    > Es necesario agregarlo tambien en menu_rol para que asi aparezca el nuevo rol en el menu desplegable
+> ⚠️ **¡Atención!** 
+> Es necesario agregarlo tambien en menu_rol para que asi aparezca el nuevo rol en el menu desplegable
