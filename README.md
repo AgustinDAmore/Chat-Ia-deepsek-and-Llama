@@ -48,23 +48,57 @@ Antes de comenzar, asegúrate de tener lo siguiente:
         deactivate
         ```
 ---
+##  🧑‍💻 Interfaz de usuario
+
+![alt text](image.png)
+La interfaz es responsive y simple de usar
+### **Menu superior**
+Contiene 4 opciones
+- **Archivo**
+    - **Exportar TXT**
+        Al seleccionar estaopcion nos permite exportar toda la conversacion en un txt para su posterior lectura
+- **Rol**
+    En dicha función, podemos usar roles pre-cargados. Estos roles permiten brindar contexto a la pregunta para que esta sea lo más precisa posible. Por defecto, está programado con 4 roles:
+
+    - **Asistente**:  
+    Este es el rol por defecto de todos los asistentes.
+
+    - **Filósofo**:  
+    Rol de muestra para preguntas relacionadas con filosofía.
+
+    - **Programador**:  
+    Rol de muestra para preguntas relacionadas con programación y tecnología.
+
+    - **Historiador**:  
+    Rol de muestra para preguntas relacionadas con historia y eventos pasados.
+
+- **Modo**
+    - **Cambiar modo**
+    Permite cambiar la interfaz 
+    entre blanco y oscuro
+
+- **Asistente**
+    Permite cambiar entre las dos IA
+    - **DeepSeek**
+    - **Llama**
+---
+### **Menu inferior**
+- **Entrada de texto**
+    Permite el ingreso de texto
+- **Boton Enviar**
+    Una vez redactado el mensaje de debe precionar
+    este boton para enviar el mensaje
+    
+>Debajo de la Entrda de texto
+>Se muestra el estado actual del chat
+>Rol actual: **muestra el nombre del rol activo**
+>Asistente actual: **muestra el nombre de IA activa**
+
+---
 ##  🔧 Perzonalizar el codigo
 
 ### **1. def cambiar_rol(rol):**
-En dicha función, podemos usar roles pre-cargados. Estos roles permiten brindar contexto a la pregunta para que esta sea lo más precisa posible. Por defecto, está programado con 4 roles:
 
-- **Asistente**:  
-  Este es el rol por defecto de todos los asistentes.
-
-- **Filósofo**:  
-  Rol de muestra para preguntas relacionadas con filosofía.
-
-- **Programador**:  
-  Rol de muestra para preguntas relacionadas con programación y tecnología.
-
-- **Historiador**:  
-  Rol de muestra para preguntas relacionadas con historia y eventos pasados.
-  
 ### **1.a. Crear nuevos Roles**
     ```python
     roles = {
