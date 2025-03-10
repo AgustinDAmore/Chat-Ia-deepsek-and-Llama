@@ -10,6 +10,7 @@ system_content = "You are a helpful assistant"
 rol_actual = "Asistente"
 modo_oscuro = False  # Variable para rastrear el modo actual
 asistente_actual = "DeepSeek"  # Variable para rastrear el asistente actual
+system_modelIA = "deepseek-chat"
 
 # Colores para el modo claro y oscuro
 colores_claro = {
@@ -57,7 +58,7 @@ def enviar():
         salida.config(state=tk.NORMAL)
         salida.insert(tk.END, f"Tú: {texto}\n")
         salida.insert(tk.END, f"\n")
-        salida.insert(tk.END, f"{asistente_actual}: Pensando...\n")  # Mensaje temporal
+        salida.insert(tk.END, f"{asistente_actual} {system_modelIA}: Pensando...\n")  # Mensaje temporal
         salida.yview(tk.END)  # Desplazar al final
         salida.config(state=tk.DISABLED)
 
@@ -73,7 +74,7 @@ def obtener_respuesta(texto):
         client = OpenAI(api_key=Api_Keys.api_key_deepseek, base_url="https://api.deepseek.com")
 
         response = client.chat.completions.create(
-            model="deepseek-chat",
+            model=system_modelIA,
             messages=[
                 {"role": "system", "content": system_content},  # Usar el contenido del sistema actual
                 {"role": "user", "content": texto},
@@ -92,7 +93,7 @@ def obtener_respuesta(texto):
                 {"role": "system", "content": system_content},
                 {"role": "user", "content": texto},
             ],
-            model="llama3-8b",
+            model=system_modelIA,
             stream=False
         )
         respuesta = response.choices[0].message.content
@@ -156,6 +157,13 @@ def cambiar_rol(rol):
     etiqueta_rol.config(text=f"Rol actual: {rol_actual}")  # Actualizar la etiqueta en la interfaz
     print(f"Rol cambiado a: {rol}")  # Opcional: Imprimir el rol seleccionado
 
+def cambiar_modeloIA(modeloIA):
+    global system_modelIA
+    system_modelIA = modeloIA  # Actualizar el modelo de IA actual
+    etiqueta_modeloIA.config(text=f"Modelo IA actual: {modeloIA}")  # Actualizar la etiqueta en la interfaz
+    actualizar_menu_modeloIA(modeloIA)
+    print(f"Modelo IA cambiado a: {modeloIA}")  # Opcional: Imprimir el modelo seleccionado
+
 # Función para cambiar el asistente virtual
 def cambiar_asistente(asistente):
     global asistente_actual
@@ -163,6 +171,22 @@ def cambiar_asistente(asistente):
     etiqueta_asistente.config(text=f"Asistente actual: {asistente}")  # Actualizar la etiqueta en la interfaz
     print(f"Asistente cambiado a: {asistente}")  # Opcional: Imprimir el asistente seleccionado
 
+    # Actualizar el menú de modelos de IA según el asistente seleccionado
+    if asistente == "DeepSeek":
+        cambiar_modeloIA("deepseek-chat")  # Establecer el modelo predeterminado para DeepSeek
+    else:
+        cambiar_modeloIA("llama3-8b")  # Establecer el modelo predeterminado para Llama
+
+def actualizar_menu_modeloIA(modeloIA):
+    menu_modeloIA.delete(0, tk.END)  # Limpiar el menú existente
+
+    if asistente_actual == "DeepSeek":
+        menu_modeloIA.add_command(label="deepseek-chat", command=lambda: cambiar_modeloIA("deepseek-chat"))
+    else:
+        menu_modeloIA.add_command(label="llama3-8b", command=lambda: cambiar_modeloIA("llama3-8b"))
+        menu_modeloIA.add_command(label="llama3.2-3b", command=lambda: cambiar_modeloIA("llama3.2-3b"))
+        menu_modeloIA.add_command(label="llama3-70b", command=lambda: cambiar_modeloIA("llama3-70b"))
+        menu_modeloIA.add_command(label="llama3.1-8b", command=lambda: cambiar_modeloIA("llama3.1-8b"))
 # Crear la ventana principal
 ventana = tk.Tk()
 ventana.title("Chat con DeepSeek y Llama")
@@ -199,6 +223,11 @@ menu_asistente.add_command(label="DeepSeek", command=lambda: cambiar_asistente("
 menu_asistente.add_command(label="Llama", command=lambda: cambiar_asistente("Llama"))
 barra_menu.add_cascade(label="Asistente", menu=menu_asistente)
 
+# Crear un menú "Modelo IA" para cambiar el modelo de IA
+menu_modeloIA = tk.Menu(barra_menu, tearoff=0)
+menu_modeloIA.add_command(label="deepseek-chat", command=lambda: cambiar_modeloIA("deepseek-chat"))
+barra_menu.add_cascade(label="Modelo IA", menu=menu_modeloIA)
+
 # Crear una etiqueta para mostrar el rol actual
 etiqueta_rol = tk.Label(ventana, text=f"Rol actual: {rol_actual}", font=("Arial", 10))
 etiqueta_rol.grid(row=2, column=0, columnspan=2, padx=10, pady=5, sticky="w")
@@ -206,6 +235,10 @@ etiqueta_rol.grid(row=2, column=0, columnspan=2, padx=10, pady=5, sticky="w")
 # Crear una etiqueta para mostrar el asistente actual
 etiqueta_asistente = tk.Label(ventana, text=f"Asistente actual: {asistente_actual}", font=("Arial", 10))
 etiqueta_asistente.grid(row=3, column=0, columnspan=2, padx=10, pady=5, sticky="w")
+
+# Crear una etiqueta para mostrar el modelo de IA actual
+etiqueta_modeloIA = tk.Label(ventana, text=f"Modelo IA actual: {system_modelIA}", font=("Arial", 10))
+etiqueta_modeloIA.grid(row=4, column=0, columnspan=2, padx=10, pady=5, sticky="w")
 
 # Crear un área de texto con scroll para mostrar la salida
 salida = scrolledtext.ScrolledText(ventana, wrap=tk.WORD, state=tk.DISABLED)
