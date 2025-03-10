@@ -130,25 +130,25 @@ def generar_imagenes(texto):
         model=system_modelIA,
         prompt=texto,
         config=types.GenerateImagesConfig(
-            number_of_images=4,
+            number_of_images=1,
         )
     )
     for generated_image in response.generated_images:
         image = Image.open(BytesIO(generated_image.image.image_bytes))
+        # Convertir la imagen a un formato que Tkinter pueda manejar
         image.show()
-    ventana.after(0, actualizar_interfaz, "Se genearon las imagenes!")
+        # Actualizar la interfaz gráfica con la imagen
+        ventana.after(0, actualizar_interfaz, "Se genero la imagen!")  # Pasar tk_image como argumento posicional
     
 # Función para actualizar la interfaz gráfica con la respuesta
 def actualizar_interfaz(respuesta):
-    salida.config(state=tk.NORMAL)
-    # Eliminar el mensaje "Pensando..."
-    salida.delete("end-2l", "end-1c")
-    # Insertar la respuesta real
-    salida.insert(tk.END, f"{asistente_actual} {system_modelIA}: {respuesta}\n")
-    # Aplicar formato a las partes que están entre **
-    aplicar_formato_negritas()
-    salida.yview(tk.END)  # Desplazar al final
-    salida.config(state=tk.DISABLED)
+        # Si no hay imagen, actualizar el área de texto con la respuesta
+        salida.config(state=tk.NORMAL)
+        salida.delete("end-2l", "end-1c")  # Eliminar el mensaje "Pensando..."
+        salida.insert(tk.END, f"{asistente_actual} {system_modelIA}: {respuesta}\n")
+        aplicar_formato_negritas()  # Aplicar formato a las partes en negritas
+        salida.yview(tk.END)  # Desplazar al final
+        salida.config(state=tk.DISABLED)
 
 # Función para aplicar negritas al texto entre **
 def aplicar_formato_negritas():
@@ -215,6 +215,7 @@ def cambiar_asistente(asistente):
         cambiar_modeloIA("llama3-8b")  # Establecer el modelo predeterminado para Llama
     else:
         cambiar_modeloIA("gemini-2.0-flash")
+
 def actualizar_menu_modeloIA(modeloIA):
     menu_modeloIA.delete(0, tk.END)  # Limpiar el menú existente
 
@@ -232,7 +233,7 @@ def actualizar_menu_modeloIA(modeloIA):
 
 # Crear la ventana principal
 ventana = tk.Tk()
-ventana.title("Chat con DeepSeek y Llama")
+ventana.title("Chat IA y Generar imagen")
 
 # Configurar el sistema de grid para que sea responsive
 ventana.grid_columnconfigure(0, weight=1)  # La columna 0 se expandirá
