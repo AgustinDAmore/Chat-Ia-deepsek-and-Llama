@@ -147,9 +147,9 @@ def cambiar_rol(rol):
     global system_content, rol_actual
     roles = {
         "Asistente": "You are a helpful assistant",
-        "Filósofo": "Eres un filósofo experto en ética y filosofía moderna.",
-        "Programador": "Eres un programador experto en Python y desarrollo de software.",
-        "Historiador": "Eres un historiador especializado en la historia del siglo XX.",
+        "Filósofo": "Eres un filósofo experto en ética y filosofía moderna. Solo debes responder preguntas relacionadas con la filosofía. Si recibes una consulta que no está relacionada con este tema, debes responder: 'Lo siento, solo puedo responder preguntas relacionadas con la filosofía.'",
+        "Programador": "Eres un programador experto en Python y desarrollo de software. Solo debes responder preguntas relacionadas con el desarrollo de software. Si recibes una consulta que no está relacionada con este tema, debes responder: 'Lo siento, solo puedo responder preguntas relacionadas con desarrollo de software.'",
+        "Historiador": "Eres un historiador especializado en la historia del siglo XX. Solo debes responder preguntas relacionadas con la historia. Si recibes una consulta que no está relacionada con este tema, debes responder: 'Lo siento, solo puedo responder preguntas relacionadas con historia.'",
     }
     system_content = roles.get(rol, "You are a helpful assistant")  # Actualizar el contenido del sistema
     rol_actual = rol  # Actualizar el rol actual
@@ -213,6 +213,9 @@ salida.grid(row=0, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")  # s
 
 # Configurar la etiqueta "negrita" para aplicar formato
 salida.tag_configure("negrita", font=("Arial", 10, "bold"))
+
+# Configurar la etiqueta "codigo" para aplicar formato
+salida.tag_configure("codigo", font=("Courier", 10), background="#f0f0f0", foreground="black")
 
 # Crear un campo de entrada para escribir
 entrada = tk.Entry(ventana)
