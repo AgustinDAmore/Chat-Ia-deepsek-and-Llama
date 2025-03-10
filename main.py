@@ -4,6 +4,10 @@ from openai import OpenAI
 import threading
 import re  # Para usar expresiones regulares
 import Api_Keys
+from google import genai
+from google.genai import types
+from PIL import Image
+from io import BytesIO
 
 # Variables globales
 system_content = "You are a helpful assistant"
@@ -66,7 +70,10 @@ def enviar():
         entrada.delete(0, tk.END)
 
         # Llamar a la API en segundo plano
-        threading.Thread(target=obtener_respuesta, args=(texto,)).start()
+        if(system_modelIA=="imagen-3.0-generate-002"):
+            threading.Thread(target=generar_imagenes, args=(texto,)).start()
+        else:
+            threading.Thread(target=obtener_respuesta, args=(texto,)).start()
 
 # Función para obtener la respuesta de la API
 def obtener_respuesta(texto):
@@ -97,17 +104,47 @@ def obtener_respuesta(texto):
             stream=False
         )
         respuesta = response.choices[0].message.content
+    elif asistente_actual == "Gemini":
+        client = OpenAI(
+            api_key=Api_Keys.api_key_gemini,  # Reemplaza con tu API key de Llama
+            base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+        )
 
+        response = client.chat.completions.create(
+            model=system_modelIA,
+            n=1,
+            messages=[
+                {"role": "system", "content": system_content},
+                {"role": "user", "content": texto},
+            ],
+        )
+        respuesta = response.choices[0].message.content
     # Actualizar la interfaz gráfica con la respuesta
     ventana.after(0, actualizar_interfaz, respuesta)
 
+# Función para generar imágenes con Gemini
+def generar_imagenes(texto):
+    client = genai.Client(api_key=Api_Keys.api_key_gemini)
+
+    response = client.models.generate_images(
+        model=system_modelIA,
+        prompt=texto,
+        config=types.GenerateImagesConfig(
+            number_of_images=4,
+        )
+    )
+    for generated_image in response.generated_images:
+        image = Image.open(BytesIO(generated_image.image.image_bytes))
+        image.show()
+    ventana.after(0, actualizar_interfaz, "Se genearon las imagenes!")
+    
 # Función para actualizar la interfaz gráfica con la respuesta
 def actualizar_interfaz(respuesta):
     salida.config(state=tk.NORMAL)
     # Eliminar el mensaje "Pensando..."
     salida.delete("end-2l", "end-1c")
     # Insertar la respuesta real
-    salida.insert(tk.END, f"{asistente_actual}: {respuesta}\n")
+    salida.insert(tk.END, f"{asistente_actual} {system_modelIA}: {respuesta}\n")
     # Aplicar formato a las partes que están entre **
     aplicar_formato_negritas()
     salida.yview(tk.END)  # Desplazar al final
@@ -174,19 +211,25 @@ def cambiar_asistente(asistente):
     # Actualizar el menú de modelos de IA según el asistente seleccionado
     if asistente == "DeepSeek":
         cambiar_modeloIA("deepseek-chat")  # Establecer el modelo predeterminado para DeepSeek
-    else:
+    elif asistente_actual == "Llama":
         cambiar_modeloIA("llama3-8b")  # Establecer el modelo predeterminado para Llama
-
+    else:
+        cambiar_modeloIA("gemini-2.0-flash")
 def actualizar_menu_modeloIA(modeloIA):
     menu_modeloIA.delete(0, tk.END)  # Limpiar el menú existente
 
     if asistente_actual == "DeepSeek":
         menu_modeloIA.add_command(label="deepseek-chat", command=lambda: cambiar_modeloIA("deepseek-chat"))
-    else:
+    elif asistente_actual == "Llama":
         menu_modeloIA.add_command(label="llama3-8b", command=lambda: cambiar_modeloIA("llama3-8b"))
         menu_modeloIA.add_command(label="llama3.2-3b", command=lambda: cambiar_modeloIA("llama3.2-3b"))
         menu_modeloIA.add_command(label="llama3-70b", command=lambda: cambiar_modeloIA("llama3-70b"))
         menu_modeloIA.add_command(label="llama3.1-8b", command=lambda: cambiar_modeloIA("llama3.1-8b"))
+    else:
+        menu_modeloIA.add_command(label="gemini-2.0-flash", command=lambda: cambiar_modeloIA("gemini-2.0-flash"))
+        menu_modeloIA.add_command(label="gemini-1.5-flash", command=lambda: cambiar_modeloIA("gemini-1.5-flash"))
+        menu_modeloIA.add_command(label="Generador de imagen", command=lambda: cambiar_modeloIA("imagen-3.0-generate-002"))
+
 # Crear la ventana principal
 ventana = tk.Tk()
 ventana.title("Chat con DeepSeek y Llama")
@@ -221,6 +264,7 @@ barra_menu.add_cascade(label="Modo", menu=menu_modo)
 menu_asistente = tk.Menu(barra_menu, tearoff=0)
 menu_asistente.add_command(label="DeepSeek", command=lambda: cambiar_asistente("DeepSeek"))
 menu_asistente.add_command(label="Llama", command=lambda: cambiar_asistente("Llama"))
+menu_asistente.add_command(label="Gemini", command=lambda: cambiar_asistente("Gemini"))
 barra_menu.add_cascade(label="Asistente", menu=menu_asistente)
 
 # Crear un menú "Modelo IA" para cambiar el modelo de IA
@@ -252,7 +296,7 @@ salida.tag_configure("codigo", font=("Courier", 10), background="#f0f0f0", foreg
 
 # Crear un campo de entrada para escribir
 entrada = tk.Entry(ventana)
-entrada.grid(row=1, column=0, padx=10, pady=10, sticky="ew")  # sticky="ew" para que se expanda horizontalmente
+entrada.grid(row=1, column=0, padx=10, pady=10, sticky="ew")  # sticky
 
 # Crear un botón "Enviar"
 boton_enviar = tk.Button(ventana, text="Enviar", command=enviar)

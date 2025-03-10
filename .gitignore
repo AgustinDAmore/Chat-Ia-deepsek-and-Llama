@@ -3,3 +3,4 @@ __pycache__
 .env
 Api_Keys.py
 .gitignore
+prueba.py
