@@ -9,11 +9,11 @@ Este proyecto permite interactuar con las APIs de **DeepSeek** y **Llama** para 
 Antes de comenzar, asegúrate de tener lo siguiente:
 
 1. **Claves de API**:
-   - Obtén una clave de API de [Llama](https://console.llamaapi.com/en/dashboard).
-   - Obtén una clave de API de [DeepSeek](https://platform.deepseek.com/usage).
-
+    - Obtén una clave de API de [Llama](https://console.llamaapi.com/en/dashboard).
+    - Obtén una clave de API de [DeepSeek](https://platform.deepseek.com/usage).
+    - Obtén una clave de API de [Gemini](https://ai.google.dev/gemini-api/docs/api-key).
 2. **Python**:
-   - Asegúrate de tener Python instalado (versión 3.7 o superior).
+    - Asegúrate de tener Python instalado (versión 3.7 o superior).
 
 ---
 ## 🛠️ Configuración del proyecto
@@ -25,6 +25,7 @@ Antes de comenzar, asegúrate de tener lo siguiente:
    # Api_Keys.py
    api_key_deepseek = "Tu_key_API_DeepSeek"
    api_key_llama = "Tu_key_API_Llama"
+   api_key_gemini = "Tu_key_API_Gemini"
    ```
 ---
 ## 🖥️ Se recomienda usar un .env para instalar las librerias
@@ -78,6 +79,14 @@ Antes de comenzar, asegúrate de tener lo siguiente:
     Permite cambiar entre las dos IA
     - **DeepSeek**
     - **Llama**
+    - **Gemini**
+
+- **Modelo IA**
+    - Dependiendo el Asistente seleccionado los modelos disponibles
+
+> Para generar imagenes debemos seleccionar el Asistente "Gemini"
+> luego en Modelo IA "Generador de imagen"
+> describe la imagen que quieres generar y pulse "Enviar"
 ---
 ### **Menu inferior**
 - **Entrada de texto**
@@ -93,6 +102,8 @@ Antes de comenzar, asegúrate de tener lo siguiente:
 
 >Asistente actual: **muestra el nombre de IA activa**
 
+>Modelo IA: **Modelo de IA activa**
+
 ---
 ##  🔧 Perzonalizar el codigo
 
@@ -101,19 +112,30 @@ Antes de comenzar, asegúrate de tener lo siguiente:
 ### **1.a. Crear nuevos Roles**
     roles = {
         "Asistente": "You are a helpful assistant",
-        "Filósofo": "Eres un filósofo experto en ética y filosofía moderna.",
-        "Programador": "Eres un programador experto en Python y desarrollo de software.",
-        "Historiador": "Eres un historiador especializado en la historia del siglo XX.",
+        "Filósofo": "Eres un filósofo experto en ética y filosofía moderna. ...",
+        "Programador": "Eres un programador experto en Python y desarrollo de software. ...",
+        "Historiador": "Eres un historiador especializado en la historia del siglo XX. ...",
     }
 >Vemos que la variable roles es un diccionario donde la calve es el nombre del rol
 >y el valor es como se debe comportar. siguiendo dicho formato podemos crear todos los roles que quisieramos
 
     roles = {
         "Asistente": "You are a helpful assistant",
-        "Filósofo": "Eres un filósofo experto en ética y filosofía moderna.",
-        "Programador": "Eres un programador experto en Python y desarrollo de software.",
-        "Historiador": "Eres un historiador especializado en la historia del siglo XX.",
-        "Nuevo rol": "Aqui agregamos el tema del cual es 'especialista'",
+        "Filósofo": "Eres un filósofo experto en ética y filosofía moderna. ...",
+        "Programador": "Eres un programador experto en Python y desarrollo de software. ...",
+        "Historiador": "Eres un historiador especializado en la historia del siglo XX. ...",
+        "Nuevo rol": "Aqui agregamos el tema del cual es 'especialista' ...",
     }
 > ⚠️ **¡Atención!** 
 > Es necesario agregarlo tambien en menu_rol para que asi aparezca el nuevo rol en el menu desplegable
+
+### **2. def actualizar_menu_modeloIA()**
+    Ejemplo de como agregar un nuevo modeloIA
+
+    menu_modeloIA.add_command(label="llama3.1-8b", command=lambda: cambiar_modeloIA("llama3.1-8b"))
+    label = "texto que aparece en el menu desplegable" 
+    cambiar_modeloIA = "Modelo de la IA extraido de la documentacion de cada API"
+
+> ⚠️ **¡Atención!** 
+> Cada menu_modeloIA se tiene que agregar en cada IF de la IA correspondiente
+> Para que funcione y que aparezca en la lista de Modelos IA de la interfaz

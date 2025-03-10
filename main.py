@@ -198,7 +198,7 @@ def cambiar_modeloIA(modeloIA):
     global system_modelIA
     system_modelIA = modeloIA  # Actualizar el modelo de IA actual
     etiqueta_modeloIA.config(text=f"Modelo IA actual: {modeloIA}")  # Actualizar la etiqueta en la interfaz
-    actualizar_menu_modeloIA(modeloIA)
+    actualizar_menu_modeloIA()
     print(f"Modelo IA cambiado a: {modeloIA}")  # Opcional: Imprimir el modelo seleccionado
 
 # Función para cambiar el asistente virtual
@@ -216,7 +216,7 @@ def cambiar_asistente(asistente):
     else:
         cambiar_modeloIA("gemini-2.0-flash")
 
-def actualizar_menu_modeloIA(modeloIA):
+def actualizar_menu_modeloIA():
     menu_modeloIA.delete(0, tk.END)  # Limpiar el menú existente
 
     if asistente_actual == "DeepSeek":
