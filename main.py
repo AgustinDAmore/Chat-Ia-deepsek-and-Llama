@@ -49,6 +49,7 @@ def cambiar_modo():
     ventana.config(bg=colores["fondo"])
     etiqueta_rol.config(bg=colores["fondo"], fg=colores["texto"])
     etiqueta_asistente.config(bg=colores["fondo"], fg=colores["texto"])
+    etiqueta_modeloIA.config(bg=colores["fondo"], fg=colores["texto"])
     salida.config(bg=colores["salida_fondo"], fg=colores["salida_texto"])
     entrada.config(bg=colores["entrada_fondo"], fg=colores["entrada_texto"])
     boton_enviar.config(bg=colores["boton_fondo"], fg=colores["boton_texto"])
